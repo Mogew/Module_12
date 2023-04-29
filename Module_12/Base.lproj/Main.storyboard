@@ -4,14 +4,13 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Calculator View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="Module_12" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="CalculatorViewController" customModule="Module_12" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,12 +21,13 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="e.g. 123.56" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9R-4c-z83">
-                                <rect key="frame" x="109.5" y="123" width="195" height="51.5"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 256.32" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9R-4c-z83">
+                                <rect key="frame" x="107.5" y="123" width="199" height="51.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.072857402269999996" green="0.69042676690000004" blue="0.42061376569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.072857402269999996" green="0.69042676690000004" blue="0.42061376569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RgL-Vw-Mof">
                                 <rect key="frame" x="0.0" y="224.5" width="414" height="671.5"/>
@@ -135,7 +135,7 @@
                                             <color key="titleShadowColor" red="0.072857402269999996" green="0.69042676690000004" blue="0.42061376569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="pressedCalculation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EMf-hb-uOR"/>
+                                            <action selector="calculatePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OGD-lO-qJ0"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -163,11 +163,14 @@
                             <constraint firstItem="RgL-Vw-Mof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mwF-jq-Ssg"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Rya-mg-GgB"/>
                     <connections>
+                        <outlet property="billText" destination="d9R-4c-z83" id="tQg-3x-qAR"/>
                         <outlet property="splitNumber" destination="laV-jJ-lmq" id="p7Y-tl-WVa"/>
                         <outlet property="tenPctButton" destination="zr2-Jj-Zqw" id="lHn-uE-cze"/>
                         <outlet property="twentyPctButton" destination="Sbz-WG-XNi" id="Ugf-ex-NcQ"/>
                         <outlet property="zeroPctButton" destination="vah-pZ-fWP" id="e3v-mJ-3j3"/>
+                        <segue destination="CdL-tF-2Er" kind="show" identifier="calculate" id="gS1-4T-SVy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -179,7 +182,7 @@
             <objects>
                 <viewController id="CdL-tF-2Er" customClass="ResultViewController" customModule="Module_12" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ugt-lU-6hq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9F-pv-IHd">
@@ -214,7 +217,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0e-7u-AKt">
-                                <rect key="frame" x="107" y="796" width="200" height="60"/>
+                                <rect key="frame" x="107" y="738" width="200" height="60"/>
                                 <color key="backgroundColor" red="0.072857402269999996" green="0.69042676690000004" blue="0.42061376569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Pte-XX-76g"/>
@@ -230,7 +233,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c5l-Qf-tkL"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="X9F-pv-IHd" firstAttribute="top" secondItem="ugt-lU-6hq" secondAttribute="top" id="1QX-Xy-ulb"/>
                             <constraint firstAttribute="bottom" secondItem="G0e-7u-AKt" secondAttribute="bottom" constant="40" id="3bd-PM-ddl"/>
@@ -242,6 +245,7 @@
                             <constraint firstItem="c5l-Qf-tkL" firstAttribute="trailing" secondItem="E44-0M-jtB" secondAttribute="trailing" constant="30" id="tEy-Tk-rly"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ZEm-jV-FgA"/>
                     <connections>
                         <outlet property="finalAmount" destination="VC4-iw-SKg" id="sKU-vv-Bxs"/>
                     </connections>
@@ -251,9 +255,4 @@
             <point key="canvasLocation" x="776.81159420289862" y="3.3482142857142856"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
